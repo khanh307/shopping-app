@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:id="@+id/drawerLayout"
-    tools:context=".Activity.MainActivity">
+    tools:context=".Activity.MainActivity"
+    android:fitsSystemWindows="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,18 +18,26 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolBar"
-                app:navigationIcon="@drawable/ic_menu"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolBar"
+                    app:navigationIcon="@drawable/ic_menu"
+                    android:layout_width="50dp"
+                    android:layout_height="?attr/actionBarSize"/>
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:drawableStart="@drawable/ic_baseline_search_24"
                     android:hint="Search"
-                    android:layout_marginRight='10dp' />
+                    android:textColorHint="#7C7B7B"/>
 
-            </androidx.appcompat.widget.Toolbar>
+            </LinearLayout>
+
 
             <View
                 android:layout_width="match_parent"
@@ -40,8 +49,7 @@
             android:layout_below="@+id/toolBar_layout"
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/black"/>
+            android:layout_height="match_parent"/>
 
     </RelativeLayout>
 
@@ -49,9 +57,7 @@
         android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:itemTextColor="@color/white"
-        app:itemIconTint="@color/white">
+        android:layout_gravity="start">
 
         <ListView
             android:layout_width="match_parent"

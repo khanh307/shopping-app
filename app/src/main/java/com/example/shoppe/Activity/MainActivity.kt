@@ -15,16 +15,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showNavigation() {
-//        setSupportActionBar(toolBar)
-//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//        toolBar.setNavigationOnClickListener{
-//            drawerLayout.openDrawer(GravityCompat.START)
-//        }
-
         setSupportActionBar(findViewById(R.id.toolBar))
-        var toggle : ActionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout,
-            findViewById(R.id.toolBar), R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolBar.setNavigationOnClickListener{
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
+
+
     }
 }
