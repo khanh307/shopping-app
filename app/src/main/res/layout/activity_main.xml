@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:id="@+id/drawerLayout"
-    tools:context=".Activity.MainActivity"
-    android:fitsSystemWindows="true">
+    tools:openDrawer="start"
+    tools:context=".Activity.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -34,35 +34,51 @@
                     android:layout_marginRight="10dp"
                     android:drawableStart="@drawable/ic_baseline_search_24"
                     android:hint="Search"
-                    android:textColorHint="#7C7B7B"/>
+                    android:textColorHint="#7C7B7B"
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
-
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1.5dp"
                 android:background="#0021FA"/>
         </LinearLayout>
-
         <FrameLayout
             android:layout_below="@+id/toolBar_layout"
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-
     </RelativeLayout>
-
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start">
+        android:layout_gravity="start"
+        android:background="@color/white">
 
-        <ListView
+        <LinearLayout
+            android:padding="20dp"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:background="@color/white">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_launcher_background"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Design by KhanhTQ"
+                android:textSize="20sp"
+                android:paddingLeft="5dp"
+                android:textColor="@color/black"/>
+
+            <ListView
+                android:id="@+id/listview_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
 
     </com.google.android.material.navigation.NavigationView>
-
 </androidx.drawerlayout.widget.DrawerLayout>

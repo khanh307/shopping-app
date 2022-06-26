@@ -3,10 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/drawable/ic_home.xml" value="0.14" />
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/layout/fragment_home_.xml" value="0.25" />
+        <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/layout/item_navigation.xml" value="0.24895833333333334" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>
