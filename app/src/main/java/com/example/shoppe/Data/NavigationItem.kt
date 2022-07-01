@@ -1,7 +1,7 @@
 package com.example.shoppe.Data
 
-import android.media.Image
+import android.graphics.Bitmap
 
-data class NavigationItem(var image: Int, var name: String) {
+data class NavigationItem(var id: Int, var image: String, var name: String) {
 
 }

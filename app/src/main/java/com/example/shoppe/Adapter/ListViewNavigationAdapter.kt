@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.shoppe.Data.NavigationItem
 import com.example.shoppe.R
+import com.squareup.picasso.Picasso
 
 class ListViewNavigationAdapter(var context: Context, var arrayList: ArrayList<NavigationItem>): BaseAdapter() {
     override fun getCount(): Int {
@@ -46,9 +47,10 @@ class ListViewNavigationAdapter(var context: Context, var arrayList: ArrayList<N
             viewHolder = convertView.tag as ViewHolder
         }
         var line : NavigationItem = getItem(position) as NavigationItem
-        viewHolder.imageItem.setImageResource(line.image)
         viewHolder.nameItem.text = line.name
-
+        Picasso.get().load(line.image)
+            .error(R.drawable.ic_menu)
+            .into(viewHolder.imageItem)
         return view as View
     }
 }

@@ -1,48 +1,88 @@
 package com.example.shoppe.Activity
 
+import android.R.attr.bitmap
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.AsyncTask
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.app.ActionBarDrawerToggle
+import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.Volley
 import com.example.shoppe.Adapter.ListViewNavigationAdapter
 import com.example.shoppe.Data.NavigationItem
 import com.example.shoppe.R
+import com.example.shoppe.Util.CheckConnection
+import com.example.shoppe.Util.Server
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
+import org.json.JSONException
+import org.json.JSONObject
+import java.io.IOException
+import java.io.InputStream
 import java.net.URL
+
 
 class MainActivity : AppCompatActivity() {
 
     var arrayItem : ArrayList<NavigationItem> = ArrayList()
+    var adapter: ListViewNavigationAdapter = ListViewNavigationAdapter(this, arrayItem)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        replaceFragment(Home_Fragment())
         showNavigation()
-
-        setAdapterListViewNavigation()
-
-
-        var url = "http://192.168.1.172:8012/shopee/images/ic_app.png"
-        var srl = "https://cdn01.dienmaycholon.vn/filewebdmclnew/public//userupload/images/he-dieu-hanh-android-la-gi-3.jpg"
-        Picasso.get().load(url)
-            .error(R.drawable.ic_battery)
-            .into(imageview)
+        if (CheckConnection.haveNetworkConnection(applicationContext)){
+            setAdapterListViewNavigation()
+        } else{
+            CheckConnection.showToast(applicationContext, "Kiểm tra kết nối")
+        }
 
     }
+
 
     private fun setAdapterListViewNavigation() {
-        arrayItem.add(NavigationItem(R.drawable.ic_home, "Home"))
-        arrayItem.add(NavigationItem(R.drawable.ic_smartphone, "Smartphone"))
-        arrayItem.add(NavigationItem(R.drawable.ic_battery, "Battery"))
-        arrayItem.add(NavigationItem(R.drawable.ic_headphones, "Headphone"))
-        var adapter: ListViewNavigationAdapter = ListViewNavigationAdapter(this, arrayItem)
+        getDataNavigation()
         listview_navigation.adapter = adapter
+        listview_navigation.setOnItemClickListener { parent, view, position, id ->
+            if(id.toString().equals("0")){
+                replaceFragment(Home_Fragment())
+                Toast.makeText(applicationContext, id.toString(), Toast.LENGTH_SHORT).show()
+                drawerLayout.closeDrawer(GravityCompat.START)
+            }
+        }
+        adapter.notifyDataSetInvalidated()
     }
+
+    fun getDataNavigation(){
+        var requestQueue: RequestQueue = Volley.newRequestQueue(applicationContext);
+        var jsonArray: JsonArrayRequest = JsonArrayRequest(Server.pathProduct, Response.Listener {response ->
+            if (response != null){
+                for(i in 0 until response.length()){
+                    var jsonObject: JSONObject = response.getJSONObject(i)
+                    var id = jsonObject.getInt("id")
+                    var name = jsonObject.getString("name")
+                    var icon = jsonObject.getString("icon")
+                    icon = icon.replace("localhost:8012", Server.localhost)
+                    Log.d("CCC", icon)
+                    arrayItem.add(NavigationItem(id, icon, name))
+                    adapter.notifyDataSetInvalidated()
+                }
+            }
+        }, Response.ErrorListener {
+
+        })
+        requestQueue.add(jsonArray)
+    }
+
+
 
     private fun showNavigation() {
         setSupportActionBar(findViewById(R.id.toolBar))
@@ -51,5 +91,12 @@ class MainActivity : AppCompatActivity() {
             drawerLayout.openDrawer(GravityCompat.START)
         }
     }
+
+    private fun replaceFragment(fragment: Fragment){
+        var tranction: FragmentTransaction = supportFragmentManager.beginTransaction()
+        tranction.replace(R.id.content_frame,fragment)
+        tranction.commit()
+    }
+
 
 }

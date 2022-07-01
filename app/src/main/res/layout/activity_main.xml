@@ -43,18 +43,16 @@
                 android:layout_height="1.5dp"
                 android:background="#0021FA"/>
         </LinearLayout>
-<!--        <FrameLayout-->
-<!--            android:layout_below="@+id/toolBar_layout"-->
-<!--            android:id="@+id/content_frame"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"/>-->
-            <ImageView
-                android:layout_below="@+id/toolBar_layout"
-                android:scaleType="centerCrop"
-                android:id="@+id/imageview"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@mipmap/ic_launcher"/>
+        <FrameLayout
+            android:layout_below="@+id/toolBar_layout"
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/imageview"/>
 
     </RelativeLayout>
     <com.google.android.material.navigation.NavigationView
