@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -46,15 +47,54 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
-
+    var frame = ProductFragment()
     private fun setAdapterListViewNavigation() {
         getDataNavigation()
         listview_navigation.adapter = adapter
+
         listview_navigation.setOnItemClickListener { parent, view, position, id ->
-            if(id.toString().equals("0")){
+            view.isSelected = true
+            var index = id.toString()
+            if(index.equals("0")){
                 replaceFragment(Home_Fragment())
                 Toast.makeText(applicationContext, id.toString(), Toast.LENGTH_SHORT).show()
+                drawerLayout.closeDrawer(GravityCompat.START)
+            } else if(index.equals("1")){
+
+                var bundle: Bundle = Bundle()
+                bundle.putString("title","Điện thoại")
+                frame.arguments = bundle
+                replaceFragment(frame)
+                drawerLayout.closeDrawer(GravityCompat.START)
+            } else if(index.equals("2")){
+                var bundle: Bundle = Bundle()
+                bundle.putString("title","Sạc dự phòng")
+                frame.arguments = bundle
+                replaceFragment(frame)
+                drawerLayout.closeDrawer(GravityCompat.START)
+            } else if(index.equals("3")){
+                var bundle: Bundle = Bundle()
+                bundle.putString("title","Tai nghe")
+                frame.arguments = bundle
+                replaceFragment(frame)
+                drawerLayout.closeDrawer(GravityCompat.START)
+            } else if(index.equals("4")){
+                var bundle: Bundle = Bundle()
+                bundle.putString("title","Ốp lưng")
+                frame.arguments = bundle
+                replaceFragment(frame)
+                drawerLayout.closeDrawer(GravityCompat.START)
+            } else if(index.equals("5")){
+                var bundle: Bundle = Bundle()
+                bundle.putString("title","Cáp sạc")
+                frame.arguments = bundle
+                replaceFragment(frame)
+                drawerLayout.closeDrawer(GravityCompat.START)
+            } else if(index.equals("6")){
+                var bundle: Bundle = Bundle()
+                bundle.putString("title","Loa")
+                frame.arguments = bundle
+                replaceFragment(frame)
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
         }

@@ -5,11 +5,14 @@
     android:orientation="vertical"
     android:background="@color/white">
     <LinearLayout
+        android:background="@drawable/item_selected"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp">
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="10dp">
         <ImageView
             android:id="@+id/image_item"
             android:layout_width="40dp"
@@ -30,7 +33,7 @@
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1.5dp"
+        android:layout_height="1dp"
         android:background="#006BFF" />
 
 </LinearLayout>

@@ -6,8 +6,11 @@
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/drawable/ic_battery.xml" value="0.14" />
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/drawable/ic_headphones.xml" value="0.14" />
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/drawable/ic_home.xml" value="0.14" />
+        <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/drawable/item_selected.xml" value="0.14" />
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/layout/fragment_home_.xml" value="0.25" />
+        <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/layout/fragment_product.xml" value="0.1609375" />
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/layout/item_navigation.xml" value="0.24895833333333334" />
       </map>
     </option>
