@@ -17,7 +17,9 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.example.shoppe.Adapter.ListViewNavigationAdapter
+import com.example.shoppe.Adapter.ProductAdapter
 import com.example.shoppe.Data.NavigationItem
+import com.example.shoppe.Data.Product
 import com.example.shoppe.R
 import com.example.shoppe.Util.CheckConnection
 import com.example.shoppe.Util.Server
@@ -35,11 +37,13 @@ class MainActivity : AppCompatActivity() {
     var arrayItem : ArrayList<NavigationItem> = ArrayList()
     var adapter: ListViewNavigationAdapter = ListViewNavigationAdapter(this, arrayItem)
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         replaceFragment(Home_Fragment())
         showNavigation()
+
         if (CheckConnection.haveNetworkConnection(applicationContext)){
             setAdapterListViewNavigation()
         } else{
@@ -138,5 +142,8 @@ class MainActivity : AppCompatActivity() {
         tranction.commit()
     }
 
+    private fun setApdapterProduct(){
+
+    }
 
 }

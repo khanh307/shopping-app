@@ -24,6 +24,7 @@ class ProductFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        Log.d("CCC", "onStart")
         var bundle = arguments
         if(bundle != null){
             textview.text = bundle.getString("title")

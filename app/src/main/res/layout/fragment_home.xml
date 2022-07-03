@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.Home_Fragment"
-    android:background="@color/purple_200">
+    android:background="@color/white">
 
     <LinearLayout
         android:orientation="vertical"
@@ -18,9 +18,12 @@
             android:layout_height="0dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:clipToPadding="false"
+            android:background="@color/purple_200"
+            android:id="@+id/viewProduct"
             android:layout_weight="7"
             android:layout_width="match_parent"
-            android:layout_height="0dp"/>
+            android:layout_height="0dp" />
     </LinearLayout>
 
 
