@@ -33,12 +33,12 @@ class Home_Fragment : Fragment() {
 
     private fun addItem(){
         var image = "https://cdn01.dienmaycholon.vn/filewebdmclnew/DMCL21/Picture//Apro/Apro_product_30009/dien-thoai-sams_main_346_1020.png.webp"
-        arrayProduct.add(Product(0, "Điện thoại", image, 1000000F, "AAAA", 2))
-        arrayProduct.add(Product(1, "Điện thoại", image, 1000000F, "AAAA", 2))
-        arrayProduct.add(Product(2, "Điện thoại", image, 1000000F, "AAAA", 2))
-        arrayProduct.add(Product(3, "Điện thoại", image, 1000000F, "AAAA", 2))
-        arrayProduct.add(Product(4, "Điện thoại", image, 1000000F, "AAAA", 2))
-        arrayProduct.add(Product(5, "Điện thoại", image, 1000000F, "AAAA", 2))
+        arrayProduct.add(Product(0, "Điện thoại Samsung Galaxy S21 Ultra 5G", image, 1000000F, "AAAA", 2))
+        arrayProduct.add(Product(1, "Điện thoại Samsung Galaxy S21 Ultra 5G", image, 1000000F, "AAAA", 2))
+        arrayProduct.add(Product(2, "Điện thoại Samsung Galaxy S21 Ultra 5G", image, 1000000F, "AAAA", 2))
+        arrayProduct.add(Product(3, "Điện thoại Samsung Galaxy S21 Ultra 5G", image, 1000000F, "AAAA", 2))
+        arrayProduct.add(Product(4, "Điện thoại Samsung Galaxy S21 Ultra 5G", image, 1000000F, "AAAA", 2))
+        arrayProduct.add(Product(5, "Điện thoại Samsung Galaxy S21 Ultra 5G", image, 1000000F, "AAAA", 2))
         productAdapter.notifyDataSetChanged()
     }
 
