@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.14" />
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/drawable/ic_battery.xml" value="0.14" />
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/drawable/ic_headphones.xml" value="0.14" />
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/drawable/ic_home.xml" value="0.14" />
