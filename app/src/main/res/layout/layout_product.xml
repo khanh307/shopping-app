@@ -7,9 +7,10 @@
     android:padding="2.5dp">
 
     <androidx.cardview.widget.CardView
-        android:background="@color/white"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@android:color/transparent"
         android:id="@+id/cardView"
-        app:cardCornerRadius="5dp"
+        app:cardCornerRadius="3dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -37,7 +38,7 @@
 
             <TextView
                 android:text="Price"
-                android:textColor="#CA1010"
+                android:textColor="#df5136"
                 android:textSize="18sp"
                 android:id="@+id/productprice"
                 android:layout_width="wrap_content"

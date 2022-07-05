@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:id="@+id/drawerLayout"
     tools:context=".Activity.MainActivity"
-    tools:openDrawer="start">
+    tools:openDrawer="">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,23 +20,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolBar"
-                    app:navigationIcon="@drawable/ic_menu"
+                    app:navigationIcon="@drawable/ic_baseline_menu_24"
                     android:layout_width="50dp"
-                    android:layout_height="?attr/actionBarSize"/>
+                    android:layout_height="50dp"/>
 
                 <EditText
+                    android:id="@+id/search"
+                    android:background="@drawable/search_background"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="60dp"
                     android:drawableStart="@drawable/ic_baseline_search_24"
                     android:hint="Search"
-                    android:textColorHint="#7C7B7B"
+                    android:textColorHint="#ce5941"
+                    android:textSize="25sp"
                     android:textColor="@color/black"/>
+
+                <ImageButton
+                    android:layout_marginLeft="-60dp"
+                    android:background="@null"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_baseline_shopping_cart_24"/>
 
             </LinearLayout>
             <View
