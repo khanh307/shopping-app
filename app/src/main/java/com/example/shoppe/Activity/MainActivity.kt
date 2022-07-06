@@ -146,6 +146,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun replaceFragment(fragment: Fragment){
         var tranction: FragmentTransaction = supportFragmentManager.beginTransaction()
+        tranction.setCustomAnimations(R.anim.open_fragment, R.anim.exit_fragment)
         tranction.replace(R.id.content_frame,fragment)
         tranction.commit()
     }
