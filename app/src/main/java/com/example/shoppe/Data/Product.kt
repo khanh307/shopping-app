@@ -4,8 +4,8 @@ data class Product(
     var id: Int,
     var name: String,
     var image: String,
-    var price: Float,
+    var price: Double,
     var detail: String,
     var type: Int
-) {
+): java.io.Serializable {
 }

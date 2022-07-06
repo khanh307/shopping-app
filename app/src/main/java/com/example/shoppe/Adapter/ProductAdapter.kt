@@ -1,6 +1,7 @@
 package com.example.shoppe.Adapter
 
 import android.content.Context
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,10 +19,12 @@ class ProductAdapter(var context: Context, var arrayProduct: ArrayList<Product>)
         var imageView: ImageView
         var tvPrice: TextView
         var tvName: TextView
+        var tvDetail: TextView
         init {
             imageView = itemView.findViewById(R.id.productimage)
             tvPrice = itemView.findViewById(R.id.productprice)
             tvName = itemView.findViewById(R.id.productname)
+            tvDetail = itemView.findViewById(R.id.productdetail)
         }
 
     }
@@ -39,6 +42,9 @@ class ProductAdapter(var context: Context, var arrayProduct: ArrayList<Product>)
         holder.tvName.text = item.name
         var decimalFormat: DecimalFormat = DecimalFormat("###,###,###");
         holder.tvPrice.text = decimalFormat.format(item.price)
+        holder.tvDetail.maxLines = 2
+        holder.tvDetail.ellipsize = TextUtils.TruncateAt.END
+        holder.tvDetail.text = item.detail
         Picasso.get().load(item.image).into(holder.imageView)
     }
 

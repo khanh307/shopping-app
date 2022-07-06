@@ -1,6 +1,7 @@
 package com.example.shoppe.Activity
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,17 +12,24 @@ import android.widget.ImageView
 import android.widget.ViewFlipper
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.Volley
 import com.example.shoppe.Adapter.ProductAdapter
 import com.example.shoppe.Data.Product
 import com.example.shoppe.R
+import com.example.shoppe.Util.Server
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.json.JSONObject
 
 class Home_Fragment : Fragment() {
-    var arrayProduct: ArrayList<Product> = ArrayList()
+    var arrayNewProduct: ArrayList<Product> = ArrayList()
     lateinit var productAdapter: ProductAdapter;
 
     lateinit var viewFlipper: ViewFlipper;
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,26 +38,40 @@ class Home_Fragment : Fragment() {
         var view = inflater.inflate(R.layout.fragment_home, container, false)
         var viewProduct: RecyclerView = view.findViewById(R.id.viewProduct)
         viewFlipper = view.findViewById(R.id.viewFlipper)
-        productAdapter = ProductAdapter(requireContext(), arrayProduct)
+        productAdapter = ProductAdapter(requireContext(), arrayNewProduct)
         viewProduct.setHasFixedSize(true)
         viewProduct.layoutManager = GridLayoutManager(context, 2)
 
-        viewProduct
         viewProduct.adapter = productAdapter
-        addItem()
+
+        getNewProduct()
         actionViewFlipper()
+
+        Log.d("CCC", "onCreateView")
         return view
     }
 
-    private fun addItem(){
-        var image = "https://cdn01.dienmaycholon.vn/filewebdmclnew/DMCL21/Picture//Apro/Apro_product_30009/dien-thoai-sams_main_346_1020.png.webp"
-        arrayProduct.add(Product(0, "Điện thoại Samsung Galaxy S21 Ultra 5G", image, 1000000F, "AAAA", 2))
-        arrayProduct.add(Product(1, "Điện thoại Samsung Galaxy S21 Ultra 5G", image, 1000000F, "AAAA", 2))
-        arrayProduct.add(Product(2, "Điện thoại Samsung Galaxy S21 Ultra 5G", image, 1000000F, "AAAA", 2))
-        arrayProduct.add(Product(3, "Điện thoại Samsung Galaxy S21 Ultra 5G", image, 1000000F, "AAAA", 2))
-        arrayProduct.add(Product(4, "Điện thoại Samsung Galaxy S21 Ultra 5G", image, 1000000F, "AAAA", 2))
-        arrayProduct.add(Product(5, "Điện thoại Samsung Galaxy S21 Ultra 5G", image, 1000000F, "AAAA", 2))
-        productAdapter.notifyDataSetChanged()
+    private fun getNewProduct() {
+        var requestQueue: RequestQueue = Volley.newRequestQueue(context)
+        var jsonArrayRequest: JsonArrayRequest = JsonArrayRequest(Server.pathNewProduct, Response.Listener { response->
+            if(response != null){
+                for(i in 0 until response.length()){
+                    var jsonObject: JSONObject = response.getJSONObject(i)
+                    var id = jsonObject.getInt("id")
+                    var name = jsonObject.getString("name")
+                    var image = jsonObject.getString("image")
+                    image = image.replace("localhost:8012", Server.localhost)
+                    var price = jsonObject.getDouble("price")
+                    var detail = jsonObject.getString("detail")
+                    var type = jsonObject.getInt("idtype")
+                    arrayNewProduct.add(Product(id, name, image, price, detail, type))
+                    productAdapter.notifyDataSetChanged()
+                }
+            }
+        }, Response.ErrorListener {
+
+        })
+        requestQueue.add(jsonArrayRequest)
     }
 
     private fun actionViewFlipper(){
@@ -71,6 +93,4 @@ class Home_Fragment : Fragment() {
         viewFlipper.setInAnimation(animation_in)
         viewFlipper.setOutAnimation(animation_out)
     }
-
-
 }

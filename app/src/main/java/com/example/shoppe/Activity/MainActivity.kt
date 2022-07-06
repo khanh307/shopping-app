@@ -36,69 +36,78 @@ class MainActivity : AppCompatActivity() {
 
     var arrayItem : ArrayList<NavigationItem> = ArrayList()
     var adapter: ListViewNavigationAdapter = ListViewNavigationAdapter(this, arrayItem)
-
+    var arrayNewProduct: ArrayList<Product> = ArrayList()
+    var homeFragment: Home_Fragment = Home_Fragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        replaceFragment(Home_Fragment())
+        replaceFragment(homeFragment)
+
         showNavigation()
 
         if (CheckConnection.haveNetworkConnection(applicationContext)){
             setAdapterListViewNavigation()
+
         } else{
             CheckConnection.showToast(applicationContext, "Kiểm tra kết nối")
         }
 
     }
-    var frame = ProductFragment()
+
+
     private fun setAdapterListViewNavigation() {
         getDataNavigation()
         listview_navigation.adapter = adapter
-
         listview_navigation.setOnItemClickListener { parent, view, position, id ->
             view.isSelected = true
             var index = id.toString()
             if(index.equals("0")){
-                replaceFragment(Home_Fragment())
-                Toast.makeText(applicationContext, id.toString(), Toast.LENGTH_SHORT).show()
+                replaceFragment(homeFragment)
+                homeFragment.arrayNewProduct = arrayNewProduct
                 drawerLayout.closeDrawer(GravityCompat.START)
             } else if(index.equals("1")){
-
+                var productFragment: ProductFragment = ProductFragment()
                 var bundle: Bundle = Bundle()
-                bundle.putString("title","Điện thoại")
-                frame.arguments = bundle
-                replaceFragment(frame)
+                bundle.putString("id", "1")
+                productFragment.arguments = bundle
+                replaceFragment(productFragment)
+                productFragment.arrayProduct = arrayNewProduct
                 drawerLayout.closeDrawer(GravityCompat.START)
             } else if(index.equals("2")){
+                var productFragment: ProductFragment = ProductFragment()
                 var bundle: Bundle = Bundle()
-                bundle.putString("title","Sạc dự phòng")
-                frame.arguments = bundle
-                replaceFragment(frame)
+                bundle.putString("id", "2")
+                productFragment.arguments = bundle
+                replaceFragment(productFragment)
                 drawerLayout.closeDrawer(GravityCompat.START)
             } else if(index.equals("3")){
+                var productFragment: ProductFragment = ProductFragment()
                 var bundle: Bundle = Bundle()
-                bundle.putString("title","Tai nghe")
-                frame.arguments = bundle
-                replaceFragment(frame)
+                bundle.putString("id", "3")
+                productFragment.arguments = bundle
+                replaceFragment(productFragment)
                 drawerLayout.closeDrawer(GravityCompat.START)
             } else if(index.equals("4")){
+                var productFragment: ProductFragment = ProductFragment()
                 var bundle: Bundle = Bundle()
-                bundle.putString("title","Ốp lưng")
-                frame.arguments = bundle
-                replaceFragment(frame)
+                bundle.putString("id", "4")
+                productFragment.arguments = bundle
+                replaceFragment(productFragment)
                 drawerLayout.closeDrawer(GravityCompat.START)
             } else if(index.equals("5")){
+                var productFragment: ProductFragment = ProductFragment()
                 var bundle: Bundle = Bundle()
-                bundle.putString("title","Cáp sạc")
-                frame.arguments = bundle
-                replaceFragment(frame)
+                bundle.putString("id", "5")
+                productFragment.arguments = bundle
+                replaceFragment(productFragment)
                 drawerLayout.closeDrawer(GravityCompat.START)
             } else if(index.equals("6")){
+                var productFragment: ProductFragment = ProductFragment()
                 var bundle: Bundle = Bundle()
-                bundle.putString("title","Loa")
-                frame.arguments = bundle
-                replaceFragment(frame)
+                bundle.putString("id", "6")
+                productFragment.arguments = bundle
+                replaceFragment(productFragment)
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
         }
@@ -107,7 +116,7 @@ class MainActivity : AppCompatActivity() {
 
     fun getDataNavigation(){
         var requestQueue: RequestQueue = Volley.newRequestQueue(applicationContext);
-        var jsonArray: JsonArrayRequest = JsonArrayRequest(Server.pathProduct, Response.Listener {response ->
+        var jsonArray: JsonArrayRequest = JsonArrayRequest(Server.pathType, Response.Listener {response ->
             if (response != null){
                 for(i in 0 until response.length()){
                     var jsonObject: JSONObject = response.getJSONObject(i)
@@ -115,7 +124,6 @@ class MainActivity : AppCompatActivity() {
                     var name = jsonObject.getString("name")
                     var icon = jsonObject.getString("icon")
                     icon = icon.replace("localhost:8012", Server.localhost)
-                    Log.d("CCC", icon)
                     arrayItem.add(NavigationItem(id, icon, name))
                     adapter.notifyDataSetInvalidated()
                 }

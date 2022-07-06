@@ -5,13 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".Activity.ProductFragment">
 
-
-    <TextView
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        android:id="@+id/textview"
+    <androidx.recyclerview.widget.RecyclerView
+        android:padding="2.5dp"
+        android:clipToPadding="false"
+        android:background="#f6f6f6"
+        android:id="@+id/viewMain"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="0000" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>
