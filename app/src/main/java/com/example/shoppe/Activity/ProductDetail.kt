@@ -13,8 +13,8 @@ class ProductDetail : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_detail)
-        var intent: Intent = intent
-        var product: Product = intent.getSerializableExtra("object_product") as Product
+        var bundle: Bundle = intent.extras!!
+        var product: Product = bundle?.getSerializable("object_product") as Product
         Picasso.get().load(product.image).into(imageproduct)
         nameproduct.text = product.name
         var decimalFormat: DecimalFormat = DecimalFormat("###,###,###");

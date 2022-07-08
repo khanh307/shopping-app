@@ -53,8 +53,8 @@ class MainActivity : AppCompatActivity() {
     fun intentActivity(product: Product){
         var mIntent: Intent = Intent(this, ProductDetail::class.java)
         var bundle: Bundle = Bundle()
-        bundle.putSerializable("object_product",product)
-        intent.putExtras(bundle)
+        bundle.putSerializable("object_product", product)
+        mIntent.putExtras(bundle)
         startActivity(mIntent)
     }
 
