@@ -5,38 +5,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.ProductDetail"
-    android:background="@color/white"
-    android:padding="10dp"
+    android:background="#fefefc"
     android:orientation="vertical">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/backBtn"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:navigationIcon="@drawable/ic_back"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:background="#eeeeee"/>
+
     <LinearLayout
+        android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <androidx.cardview.widget.CardView
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/imageproduct"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:src="@drawable/ic_battery" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:background="#eeeeee"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/nameproduct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="4dp"
-            android:background="@android:color/transparent">
-            <ImageView
-                android:id="@+id/imageproduct"
-                android:layout_width="200dp"
-                android:layout_height="300dp"
-                android:src="@drawable/ic_battery"
-                android:scaleType="centerCrop"/>
-        </androidx.cardview.widget.CardView>
-        <LinearLayout
-            android:padding="10dp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/nameproduct"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Name"
-                android:textColor="@color/black"
-                android:textSize="25sp"/>
+            android:text="Name"
+            android:textColor="@color/black"
+            android:textSize="22sp"/>
+
             <TextView
                 android:layout_marginTop="10dp"
                 android:id="@+id/priceproduct"
@@ -44,22 +56,99 @@
                 android:layout_height="wrap_content"
                 android:text="Price"
                 android:textSize="15sp"
-                android:textColor="@color/black"/>
-        </LinearLayout>
-    </LinearLayout>
+                android:textColor="#ce5941"/>
+        <LinearLayout
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            android:paddingTop="5dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:id="@+id/subBtn"
+                    android:background="@color/white"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_sub"/>
+                <TextView
+                    android:id="@+id/amount"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    android:text="0"
+                    android:textColor="#9c9c9a"
+                    android:textAlignment="center"/>
+                <ImageButton
+                    android:id="@+id/addBtn"
+                    android:background="@color/white"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_add"/>
+            </LinearLayout>
+
+            <Button
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/background_button"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_add_cart"
+                android:text="Thêm vào giỏ hàng"
+                android:textColor="@color/white"/>
+        </LinearLayout>
         <TextView
+            android:paddingTop="10dp"
             android:id="@+id/detailproduct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Detail"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="#787777"/>
     </LinearLayout>
 
+    <RelativeLayout
+        android:padding="5dp"
+        android:layout_marginTop="-50dp"
+        android:background="#ce5941"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:id="@+id/total"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Tổng: "
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+        <TextView
+            android:layout_toRightOf="@+id/total"
+            android:id="@+id/caculator"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:text="1000"/>
+
+        <TextView
+            android:id="@+id/result"
+            android:layout_alignParentRight="true"
+            android:gravity="center|right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:text="1000000"/>
+
+    </RelativeLayout>
 
 
 </LinearLayout>

@@ -86,7 +86,7 @@ class ProductAdapter(var context: Context, var arrayProduct: ArrayList<Product>,
             var productHolder = holder as ProductHolder
             productHolder.tvName.text = item.name
             var decimalFormat: DecimalFormat = DecimalFormat("###,###,###");
-            productHolder.tvPrice.text = decimalFormat.format(item.price)
+            productHolder.tvPrice.text = "đ"+decimalFormat.format(item.price)
             productHolder.tvDetail.maxLines = 2
             productHolder.tvDetail.ellipsize = TextUtils.TruncateAt.END
             productHolder.tvDetail.text = item.detail
