@@ -1,13 +1,8 @@
 package com.example.shoppe.Activity
 
-import android.R.attr.bitmap
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.os.AsyncTask
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
@@ -53,6 +48,14 @@ class MainActivity : AppCompatActivity() {
             CheckConnection.showToast(applicationContext, "Kiểm tra kết nối")
         }
 
+    }
+
+    fun intentActivity(product: Product){
+        var mIntent: Intent = Intent(this, ProductDetail::class.java)
+        var bundle: Bundle = Bundle()
+        bundle.putSerializable("object_product",product)
+        intent.putExtras(bundle)
+        startActivity(mIntent)
     }
 
 
@@ -151,8 +154,6 @@ class MainActivity : AppCompatActivity() {
         tranction.commit()
     }
 
-    private fun setApdapterProduct(){
 
-    }
 
 }

@@ -1,5 +1,6 @@
 package com.example.shoppe.Activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.Toast
 import android.widget.ViewFlipper
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,18 +20,19 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.example.shoppe.Adapter.ProductAdapter
 import com.example.shoppe.Data.Product
+import com.example.shoppe.Listener.IClickItemListener
 import com.example.shoppe.R
 import com.example.shoppe.Util.Server
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.json.JSONObject
 
-class Home_Fragment : Fragment() {
+class Home_Fragment : Fragment(){
     var arrayNewProduct: ArrayList<Product> = ArrayList()
     lateinit var productAdapter: ProductAdapter;
 
     lateinit var viewFlipper: ViewFlipper;
-
+    lateinit var mMainActivity: MainActivity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,9 +41,16 @@ class Home_Fragment : Fragment() {
         var view = inflater.inflate(R.layout.fragment_home, container, false)
         var viewProduct: RecyclerView = view.findViewById(R.id.viewProduct)
         viewFlipper = view.findViewById(R.id.viewFlipper)
-        productAdapter = ProductAdapter(requireContext(), arrayNewProduct)
+        productAdapter = ProductAdapter(requireContext(), arrayNewProduct,
+            object : IClickItemListener {
+                override fun clickItem(product: Product) {
+                    mMainActivity.intentActivity(product)
+                }
+            })
         viewProduct.setHasFixedSize(true)
         viewProduct.layoutManager = GridLayoutManager(context, 2)
+
+        mMainActivity = activity as MainActivity
 
         viewProduct.adapter = productAdapter
 
@@ -93,4 +103,6 @@ class Home_Fragment : Fragment() {
         viewFlipper.setInAnimation(animation_in)
         viewFlipper.setOutAnimation(animation_out)
     }
+
+
 }
