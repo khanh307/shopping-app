@@ -34,12 +34,20 @@ class MainActivity : AppCompatActivity() {
 
         showNavigation()
 
+        cart.setOnClickListener {
+            var intent: Intent = Intent(this, CartActivity::class.java)
+            startActivity(intent)
+//            overridePendingTransition(R.anim.slide_enter_left, R.anim.slide_exit_left)
+        }
+
         if (CheckConnection.haveNetworkConnection(applicationContext)){
             setAdapterListViewNavigation()
 
         } else{
             CheckConnection.showToast(applicationContext, "Kiểm tra kết nối")
         }
+
+
 
     }
 

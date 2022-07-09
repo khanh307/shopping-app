@@ -10,13 +10,16 @@
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/drawable/ic_home.xml" value="0.14" />
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/drawable/item_selected.xml" value="0.14" />
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/drawable/search_background.xml" value="0.14" />
+        <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/layout/activity_cart.xml" value="0.25" />
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/layout/activity_product_detail.xml" value="0.25" />
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/layout/fragment_home_.xml" value="0.25" />
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/layout/fragment_product.xml" value="0.1609375" />
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/layout/item_navigation.xml" value="0.24895833333333334" />
+        <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/layout/layout_item_in_cart.xml" value="0.25" />
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/layout/layout_product.xml" value="0.21666666666666667" />
+        <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/layout/layout_title_in_cart.xml" value="0.24895833333333334" />
         <entry key="..\:/AndroidKotlin/Shoppe/app/src/main/res/layout/load_product_layout.xml" value="0.1609375" />
       </map>
     </option>

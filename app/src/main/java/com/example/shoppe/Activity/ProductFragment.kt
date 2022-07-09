@@ -11,6 +11,8 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import android.widget.AdapterView.OnItemClickListener
 import androidx.core.os.HandlerCompat.postDelayed
 import androidx.recyclerview.widget.GridLayoutManager
@@ -37,7 +39,6 @@ class ProductFragment : Fragment(){
     lateinit var adapterProduct: ProductAdapter
     var arrayProduct: ArrayList<Product> = ArrayList()
     lateinit var type: String
-    lateinit var footer: View
     lateinit var viewMain: RecyclerView
     var gridLayoutManager = GridLayoutManager(context, 2)
 
@@ -53,14 +54,15 @@ class ProductFragment : Fragment(){
         var view = inflater.inflate(R.layout.fragment_product, container, false)
         viewMain = view.findViewById(R.id.viewMain)
         mMainActivity = activity as MainActivity
-        var inflaterfooter: LayoutInflater = requireContext().getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        footer = inflaterfooter.inflate(R.layout.load_product_layout, null)
+
 
         var bundle = arguments
         if(bundle != null){
             type = bundle.getString("id", "-1")
         }
-        getData(page)
+        viewMain.setHasFixedSize(true)
+        viewMain.layoutManager = gridLayoutManager
+
         adapterProduct = ProductAdapter(requireContext(), arrayProduct,
             object : IClickItemListener {
                 override fun clickItem(product: Product) {
@@ -68,10 +70,8 @@ class ProductFragment : Fragment(){
                 }
             })
 
-        viewMain.setHasFixedSize(true)
-        viewMain.layoutManager = gridLayoutManager
         viewMain.adapter = adapterProduct
-
+        getData(page)
 
         return view
     }

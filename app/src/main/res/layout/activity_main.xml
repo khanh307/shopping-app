@@ -45,6 +45,7 @@
                     android:textColor="@color/black"/>
 
                 <ImageButton
+                    android:id="@+id/cart"
                     android:layout_marginLeft="-60dp"
                     android:background="@null"
                     android:layout_width="50dp"
