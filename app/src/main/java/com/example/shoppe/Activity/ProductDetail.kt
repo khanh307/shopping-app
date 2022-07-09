@@ -59,7 +59,12 @@ class ProductDetail : AppCompatActivity() {
         setSupportActionBar(backBtn)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         backBtn.setNavigationOnClickListener{
-            finish()
+            onBackPressed()
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_enter_right, R.anim.slide_exit_right)
     }
 }

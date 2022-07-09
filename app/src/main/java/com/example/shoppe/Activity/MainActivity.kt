@@ -1,6 +1,5 @@
 package com.example.shoppe.Activity
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -12,19 +11,13 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.example.shoppe.Adapter.ListViewNavigationAdapter
-import com.example.shoppe.Adapter.ProductAdapter
 import com.example.shoppe.Data.NavigationItem
 import com.example.shoppe.Data.Product
 import com.example.shoppe.R
 import com.example.shoppe.Util.CheckConnection
 import com.example.shoppe.Util.Server
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
-import org.json.JSONException
 import org.json.JSONObject
-import java.io.IOException
-import java.io.InputStream
-import java.net.URL
 
 
 class MainActivity : AppCompatActivity() {
@@ -56,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         bundle.putSerializable("object_product", product)
         mIntent.putExtras(bundle)
         startActivity(mIntent)
+        overridePendingTransition(R.anim.slide_enter_left, R.anim.slide_exit_left)
     }
 
 
