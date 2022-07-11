@@ -9,6 +9,8 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
+        app:title="Chi tiết sản phẩm"
+        app:titleTextColor="#ce5941"
         android:id="@+id/backBtn"
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
@@ -82,7 +84,7 @@
                     android:textSize="20sp"
                     android:layout_width="30dp"
                     android:layout_height="40dp"
-                    android:text="0"
+                    android:text="1"
                     android:textColor="#9c9c9a"
                     android:textAlignment="center"/>
                 <ImageButton
@@ -97,7 +99,6 @@
             <Button
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/background_button"
-                android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_add_cart"

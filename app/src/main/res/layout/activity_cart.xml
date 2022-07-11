@@ -14,7 +14,8 @@
         android:layout_height="50dp"
         app:navigationIcon="@drawable/ic_back"
         app:title="Giỏ hàng"
-        app:titleTextColor="#ce5941"/>
+        app:titleTextColor="#ce5941"
+        android:id="@+id/btnBack_cart"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1.5dp"

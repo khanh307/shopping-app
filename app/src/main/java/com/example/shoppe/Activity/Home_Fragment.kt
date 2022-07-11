@@ -62,6 +62,7 @@ class Home_Fragment : Fragment(){
     }
 
     private fun getNewProduct() {
+        arrayNewProduct.clear()
         var requestQueue: RequestQueue = Volley.newRequestQueue(context)
         var jsonArrayRequest: JsonArrayRequest = JsonArrayRequest(Server.pathNewProduct, Response.Listener { response->
             if(response != null){

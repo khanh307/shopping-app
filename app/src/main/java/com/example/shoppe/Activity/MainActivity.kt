@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
 
     var arrayItem : ArrayList<NavigationItem> = ArrayList()
     var adapter: ListViewNavigationAdapter = ListViewNavigationAdapter(this, arrayItem)
-    var arrayNewProduct: ArrayList<Product> = ArrayList()
     var homeFragment: Home_Fragment = Home_Fragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,12 +36,11 @@ class MainActivity : AppCompatActivity() {
         cart.setOnClickListener {
             var intent: Intent = Intent(this, CartActivity::class.java)
             startActivity(intent)
-//            overridePendingTransition(R.anim.slide_enter_left, R.anim.slide_exit_left)
+            overridePendingTransition(R.anim.slide_enter_left, R.anim.slide_exit_left)
         }
 
         if (CheckConnection.haveNetworkConnection(applicationContext)){
             setAdapterListViewNavigation()
-
         } else{
             CheckConnection.showToast(applicationContext, "Kiểm tra kết nối")
         }
@@ -69,48 +67,46 @@ class MainActivity : AppCompatActivity() {
             var index = id.toString()
             if(index.equals("0")){
                 replaceFragment(homeFragment)
-                homeFragment.arrayNewProduct = arrayNewProduct
                 drawerLayout.closeDrawer(GravityCompat.START)
             } else if(index.equals("1")){
                 var productFragment: ProductFragment = ProductFragment()
                 var bundle: Bundle = Bundle()
-                bundle.putString("id", "1")
+                bundle.putString("id", arrayItem.get(1).id.toString())
                 productFragment.arguments = bundle
                 replaceFragment(productFragment)
-                productFragment.arrayProduct = arrayNewProduct
                 drawerLayout.closeDrawer(GravityCompat.START)
             } else if(index.equals("2")){
                 var productFragment: ProductFragment = ProductFragment()
                 var bundle: Bundle = Bundle()
-                bundle.putString("id", "2")
+                bundle.putString("id", arrayItem.get(2).id.toString())
                 productFragment.arguments = bundle
                 replaceFragment(productFragment)
                 drawerLayout.closeDrawer(GravityCompat.START)
             } else if(index.equals("3")){
                 var productFragment: ProductFragment = ProductFragment()
                 var bundle: Bundle = Bundle()
-                bundle.putString("id", "3")
+                bundle.putString("id", arrayItem.get(3).id.toString())
                 productFragment.arguments = bundle
                 replaceFragment(productFragment)
                 drawerLayout.closeDrawer(GravityCompat.START)
             } else if(index.equals("4")){
                 var productFragment: ProductFragment = ProductFragment()
                 var bundle: Bundle = Bundle()
-                bundle.putString("id", "4")
+                bundle.putString("id", arrayItem.get(4).id.toString())
                 productFragment.arguments = bundle
                 replaceFragment(productFragment)
                 drawerLayout.closeDrawer(GravityCompat.START)
             } else if(index.equals("5")){
                 var productFragment: ProductFragment = ProductFragment()
                 var bundle: Bundle = Bundle()
-                bundle.putString("id", "5")
+                bundle.putString("id", arrayItem.get(5).id.toString())
                 productFragment.arguments = bundle
                 replaceFragment(productFragment)
                 drawerLayout.closeDrawer(GravityCompat.START)
             } else if(index.equals("6")){
                 var productFragment: ProductFragment = ProductFragment()
                 var bundle: Bundle = Bundle()
-                bundle.putString("id", "6")
+                bundle.putString("id", arrayItem.get(6).id.toString())
                 productFragment.arguments = bundle
                 replaceFragment(productFragment)
                 drawerLayout.closeDrawer(GravityCompat.START)

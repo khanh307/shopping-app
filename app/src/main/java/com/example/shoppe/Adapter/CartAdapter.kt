@@ -6,28 +6,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shoppe.Data.Product
+import com.example.shoppe.Data.Product_Cart
 import com.example.shoppe.R
 import com.squareup.picasso.Picasso
 import java.text.DecimalFormat
 
-class CartAdapter(var context: Context, var arrayProduct: ArrayList<Product>):
+class CartAdapter(var context: Context, var arrayProduct: ArrayList<Product_Cart>):
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val TYPE_ITEM = 1
     private val TYPE_TITLE = 2
-    var isTitle = false
 
     class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         var checkBox: CheckBox
         var imageView: ImageView
         var tvName: TextView
         var tvPrice: TextView
-        var addBtn_cart: Button
-        var subBtn_cart: Button
+        var addBtn_cart: ImageButton
+        var subBtn_cart: ImageButton
         var amount_cart: TextView
         init {
             checkBox = itemView.findViewById(R.id.checkbox)
@@ -48,7 +49,7 @@ class CartAdapter(var context: Context, var arrayProduct: ArrayList<Product>):
     }
 
     override fun getItemViewType(position: Int): Int {
-        if(isTitle == true){
+        if(arrayProduct.get(position).isTitle == true){
             return TYPE_TITLE
         }
         return TYPE_ITEM
@@ -69,16 +70,17 @@ class CartAdapter(var context: Context, var arrayProduct: ArrayList<Product>):
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if(holder.itemViewType == TYPE_ITEM){
-            var item: Product = arrayProduct.get(position)
+            var item: Product_Cart = arrayProduct.get(position)
             var itemHodler = holder as ItemHolder
             itemHodler.tvName.text = item.name
             var decimalFormat: DecimalFormat = DecimalFormat("###,###,###");
             itemHodler.tvPrice.text = "đ"+decimalFormat.format(item.price)
-            itemHodler.amount_cart.text = "2"
+            itemHodler.amount_cart.text = item.amount.toString()
             Picasso.get().load(item.image).into(holder.imageView)
         } else {
+            var item: Product_Cart = arrayProduct.get(position)
             var titleHolder = holder as TitleHodler
-            titleHolder.title.text = "Điện thoại"
+            titleHolder.title.text = item.type
         }
     }
 
