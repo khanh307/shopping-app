@@ -2,6 +2,7 @@ package com.example.shoppe.Activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.shoppe.Adapter.ListViewNavigationAdapter
 import com.example.shoppe.Data.NavigationItem
@@ -17,6 +19,7 @@ import com.example.shoppe.R
 import com.example.shoppe.Util.CheckConnection
 import com.example.shoppe.Util.Server
 import kotlinx.android.synthetic.main.activity_main.*
+import org.json.JSONArray
 import org.json.JSONObject
 
 
@@ -30,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         replaceFragment(homeFragment)
-
         showNavigation()
 
         cart.setOnClickListener {
@@ -118,6 +120,7 @@ class MainActivity : AppCompatActivity() {
     fun getDataNavigation(){
         var requestQueue: RequestQueue = Volley.newRequestQueue(applicationContext);
         var jsonArray: JsonArrayRequest = JsonArrayRequest(Server.pathType, Response.Listener {response ->
+            Log.d("GGG", Server.pathType)
             if (response != null){
                 for(i in 0 until response.length()){
                     var jsonObject: JSONObject = response.getJSONObject(i)
@@ -125,12 +128,13 @@ class MainActivity : AppCompatActivity() {
                     var name = jsonObject.getString("name")
                     var icon = jsonObject.getString("icon")
                     icon = icon.replace("localhost:8012", Server.localhost)
+                    Log.d("GGG", icon)
                     arrayItem.add(NavigationItem(id, icon, name))
                     adapter.notifyDataSetInvalidated()
                 }
             }
         }, Response.ErrorListener {
-
+            it.printStackTrace()
         })
         requestQueue.add(jsonArray)
     }
