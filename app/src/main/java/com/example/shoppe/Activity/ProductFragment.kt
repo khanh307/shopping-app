@@ -83,7 +83,6 @@ class ProductFragment() : Fragment(){
                 load_more.visibility = View.VISIBLE
                 loadNextPage()
             }
-
             override fun isLoading(): Boolean {
                 return isLoading
             }
@@ -91,7 +90,6 @@ class ProductFragment() : Fragment(){
             override fun isLastPage(): Boolean {
                 return isLastPage
             }
-
         })
 
         return view
@@ -105,11 +103,12 @@ class ProductFragment() : Fragment(){
             isLoading = false
             load_more.visibility = View.GONE
         }, 2000)
+
     }
 
 
     private fun getData(page: Int) {
-        var requestQueue: RequestQueue = Volley.newRequestQueue(context)
+        var requestQueue: RequestQueue = Volley.newRequestQueue(requireContext())
         var path: String = Server.pathProduct + page.toString()
 
         var stringRequest: StringRequest = object : StringRequest(Request.Method.POST, path, Response.Listener { response ->
