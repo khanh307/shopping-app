@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.android.volley.RequestQueue
@@ -19,6 +22,7 @@ import com.example.shoppe.R
 import com.example.shoppe.Util.CheckConnection
 import com.example.shoppe.Util.Server
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -32,8 +36,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         replaceFragment(homeFragment)
         showNavigation()
+
 
         cart.setOnClickListener {
             var intent: Intent = Intent(this, CartActivity::class.java)
@@ -46,7 +52,6 @@ class MainActivity : AppCompatActivity() {
         } else{
             CheckConnection.showToast(applicationContext, "Kiểm tra kết nối")
         }
-
 
 
     }
@@ -64,6 +69,7 @@ class MainActivity : AppCompatActivity() {
     private fun setAdapterListViewNavigation() {
         getDataNavigation()
         listview_navigation.adapter = adapter
+
         listview_navigation.setOnItemClickListener { parent, view, position, id ->
             view.isSelected = true
             var index = id.toString()
@@ -115,6 +121,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         adapter.notifyDataSetInvalidated()
+
     }
 
     fun getDataNavigation(){

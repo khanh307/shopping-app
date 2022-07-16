@@ -3,6 +3,7 @@ package com.example.shoppe.Activity
 import android.annotation.SuppressLint
 import android.content.Context.LAYOUT_INFLATER_SERVICE
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -14,6 +15,8 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
 import android.widget.AdapterView.OnItemClickListener
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.core.os.HandlerCompat.postDelayed
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -32,7 +35,7 @@ import com.example.shoppe.Util.Server
 import org.json.JSONArray
 import org.json.JSONObject
 
-class ProductFragment : Fragment(){
+class ProductFragment() : Fragment(){
 
     lateinit var mMainActivity: MainActivity
 
@@ -41,6 +44,7 @@ class ProductFragment : Fragment(){
     lateinit var type: String
     lateinit var viewMain: RecyclerView
     var gridLayoutManager = GridLayoutManager(context, 2)
+    lateinit var load_more: ProgressBar
 
     private var isLoading = false;
     private var isLastPage = false;
@@ -54,7 +58,7 @@ class ProductFragment : Fragment(){
         var view = inflater.inflate(R.layout.fragment_product, container, false)
         viewMain = view.findViewById(R.id.viewMain)
         mMainActivity = activity as MainActivity
-
+        load_more = view.findViewById(R.id.load_more)
 
         var bundle = arguments
         if(bundle != null){
@@ -73,10 +77,35 @@ class ProductFragment : Fragment(){
         viewMain.adapter = adapterProduct
         getData(page)
 
+        viewMain.addOnScrollListener(object: PaginationScrollListener(gridLayoutManager) {
+            override fun loadMoreItems() {
+                isLoading = true
+                load_more.visibility = View.VISIBLE
+                loadNextPage()
+            }
+
+            override fun isLoading(): Boolean {
+                return isLoading
+            }
+
+            override fun isLastPage(): Boolean {
+                return isLastPage
+            }
+
+        })
+
         return view
     }
 
-
+    private fun loadNextPage(){
+        var handler = Handler()
+        handler.postDelayed({
+            page++
+            getData(page)
+            isLoading = false
+            load_more.visibility = View.GONE
+        }, 2000)
+    }
 
 
     private fun getData(page: Int) {
@@ -98,6 +127,9 @@ class ProductFragment : Fragment(){
                     arrayProduct.add(Product(id, name, image, price, detail, type))
                     adapterProduct.notifyDataSetChanged()
                 }
+            } else {
+                isLastPage = true
+                Toast.makeText(requireContext(), "Đã hết Data", Toast.LENGTH_SHORT).show()
             }
         }, Response.ErrorListener {
 

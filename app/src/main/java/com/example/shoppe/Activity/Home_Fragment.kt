@@ -1,5 +1,6 @@
 package com.example.shoppe.Activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import android.widget.ViewFlipper
 import androidx.recyclerview.widget.GridLayoutManager
@@ -31,8 +33,9 @@ class Home_Fragment : Fragment(){
     var arrayNewProduct: ArrayList<Product> = ArrayList()
     lateinit var productAdapter: ProductAdapter;
 
-    lateinit var viewFlipper: ViewFlipper;
+    lateinit var viewFlipper: ViewFlipper
     lateinit var mMainActivity: MainActivity
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +44,7 @@ class Home_Fragment : Fragment(){
         var view = inflater.inflate(R.layout.fragment_home, container, false)
         var viewProduct: RecyclerView = view.findViewById(R.id.viewProduct)
         viewFlipper = view.findViewById(R.id.viewFlipper)
+
         productAdapter = ProductAdapter(requireContext(), arrayNewProduct,
             object : IClickItemListener {
                 override fun clickItem(product: Product) {

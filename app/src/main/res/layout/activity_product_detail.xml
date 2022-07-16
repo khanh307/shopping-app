@@ -12,7 +12,6 @@
         app:title="Chi tiết sản phẩm"
         app:titleTextColor="#ce5941"
         android:id="@+id/backBtn"
-        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:navigationIcon="@drawable/ic_back"/>

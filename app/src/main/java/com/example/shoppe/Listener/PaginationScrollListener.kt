@@ -16,7 +16,7 @@ abstract class PaginationScrollListener(var gridLayoutManager: GridLayoutManager
         if(isLoading() || isLastPage()){
             return;
         }
-        if(firstVisibleItemPosition >= 0 && visibleItemCount + firstVisibleItemPosition >= totalItemCount){
+        if(firstVisibleItemPosition >= 0 && (visibleItemCount + firstVisibleItemPosition) >= totalItemCount){
             loadMoreItems()
         }
     }
