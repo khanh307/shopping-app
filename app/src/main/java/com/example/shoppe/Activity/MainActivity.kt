@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
@@ -18,6 +19,7 @@ import com.android.volley.toolbox.Volley
 import com.example.shoppe.Adapter.ListViewNavigationAdapter
 import com.example.shoppe.Data.NavigationItem
 import com.example.shoppe.Data.Product
+import com.example.shoppe.Data.Product_Cart
 import com.example.shoppe.R
 import com.example.shoppe.Util.CheckConnection
 import com.example.shoppe.Util.Server
@@ -29,31 +31,62 @@ import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
-    var arrayItem : ArrayList<NavigationItem> = ArrayList()
+    var arrayItem: ArrayList<NavigationItem> = ArrayList()
     var adapter: ListViewNavigationAdapter = ListViewNavigationAdapter(this, arrayItem)
     var homeFragment: Home_Fragment = Home_Fragment()
+    var arrayProductCart: ArrayList<Product_Cart> = ArrayList()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         replaceFragment(homeFragment)
         showNavigation()
-
-
-        cart.setOnClickListener {
-            var intent: Intent = Intent(this, CartActivity::class.java)
-            startActivity(intent)
-            overridePendingTransition(R.anim.slide_enter_left, R.anim.slide_exit_left)
-        }
 
         if (CheckConnection.haveNetworkConnection(applicationContext)){
             setAdapterListViewNavigation()
         } else{
             CheckConnection.showToast(applicationContext, "Kiểm tra kết nối")
         }
+        setDataCart()
 
+        cart.setOnClickListener {
+            var intent: Intent = Intent(this, CartActivity::class.java)
 
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_enter_left, R.anim.slide_exit_left)
+        }
+    }
+
+    fun setDataCart(){
+        var requestQueue = Volley.newRequestQueue(this);
+        var stringRequest: StringRequest = object: StringRequest(Request.Method.POST, Server.pathCart, Response.Listener{
+            response ->
+            if(response != null && response.length > 0){
+
+                var jsonArray = JSONArray(response)
+                for(i in 0 until jsonArray.length()){
+                    var jsonObject: JSONObject = jsonArray.getJSONObject(i)
+                    var id = jsonObject.getInt("id")
+                    var name = jsonObject.getString("name")
+                    var image = jsonObject.getString("image")
+                    image = image.replace("localhost:8012", Server.localhost)
+                    var price = jsonObject.getDouble("price")
+                    var amount = jsonObject.getString("amount")
+
+                    arrayProductCart.add(Product_Cart(id, name, image, price, amount.toString().toInt()))
+                    count_item.text = (i+1).toString()
+                }
+            }
+        }, Response.ErrorListener {
+        }){
+            override fun getParams(): MutableMap<String, String>? {
+                val params = HashMap<String, String>()
+                params.put("user", "khanhtq")
+                return params
+            }
+        }
+        requestQueue.add(stringRequest)
     }
 
     fun intentActivity(product: Product){
@@ -64,7 +97,6 @@ class MainActivity : AppCompatActivity() {
         startActivity(mIntent)
         overridePendingTransition(R.anim.slide_enter_left, R.anim.slide_exit_left)
     }
-
 
     private fun setAdapterListViewNavigation() {
         getDataNavigation()

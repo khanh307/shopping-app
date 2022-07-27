@@ -4,13 +4,18 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.shoppe.Data.Product
+import com.example.shoppe.Data.Product_Cart
 import com.example.shoppe.R
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_cart.*
 import kotlinx.android.synthetic.main.activity_product_detail.*
+import kotlinx.android.synthetic.main.layout_item_in_cart.*
 import java.text.DecimalFormat
 
 class ProductDetail : AppCompatActivity() {
     lateinit var product: Product
+    var productCart: Product_Cart? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_detail)
@@ -27,10 +32,13 @@ class ProductDetail : AppCompatActivity() {
     }
 
     private fun setAction(){
+        addToCart.setOnClickListener{
+
+        }
 
         var num: Int = amount.text.toString().toInt()
         subBtn.setOnClickListener{
-            if(num > 0){
+            if(num > 1){
                 num--
                 amount.text = num.toString()
                 caculator.text = priceproduct.text.toString() +" x " + num.toString()

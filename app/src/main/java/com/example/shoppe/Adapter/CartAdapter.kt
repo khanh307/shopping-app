@@ -49,9 +49,6 @@ class CartAdapter(var context: Context, var arrayProduct: ArrayList<Product_Cart
     }
 
     override fun getItemViewType(position: Int): Int {
-        if(arrayProduct.get(position).isTitle == true){
-            return TYPE_TITLE
-        }
         return TYPE_ITEM
     }
 
@@ -77,10 +74,6 @@ class CartAdapter(var context: Context, var arrayProduct: ArrayList<Product_Cart
             itemHodler.tvPrice.text = "đ"+decimalFormat.format(item.price)
             itemHodler.amount_cart.text = item.amount.toString()
             Picasso.get().load(item.image).into(holder.imageView)
-        } else {
-            var item: Product_Cart = arrayProduct.get(position)
-            var titleHolder = holder as TitleHodler
-            titleHolder.title.text = item.type
         }
     }
 

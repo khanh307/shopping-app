@@ -20,7 +20,7 @@
             android:layout_height="wrap_content">
             <LinearLayout
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingBottom="3dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -36,20 +36,36 @@
                     android:background="@drawable/search_background"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginEnd="60dp"
+                    android:layout_marginEnd="50dp"
                     android:drawableStart="@drawable/ic_baseline_search_24"
                     android:hint="Search"
                     android:textColorHint="#ce5941"
                     android:textSize="15sp"
                     android:textColor="@color/black"/>
+                <RelativeLayout
+                    android:paddingRight="3dp"
+                    android:layout_marginLeft="-50dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageButton
+                        android:id="@+id/cart"
+                        android:background="@null"
+                        android:layout_width="40dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_baseline_shopping_cart_24"/>
+                    <TextView
+                        android:layout_marginRight="3dp"
+                        android:id="@+id/count_item"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:text="3"
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:textColor="@color/color_primary"/>
 
-                <ImageButton
-                    android:id="@+id/cart"
-                    android:layout_marginLeft="-60dp"
-                    android:background="@null"
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_baseline_shopping_cart_24"/>
+                </RelativeLayout>
 
             </LinearLayout>
             <View

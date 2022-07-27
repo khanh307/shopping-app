@@ -3,11 +3,19 @@ package com.example.shoppe.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.example.shoppe.Adapter.CartAdapter
 import com.example.shoppe.Data.Product
 import com.example.shoppe.Data.Product_Cart
 import com.example.shoppe.R
+import com.example.shoppe.Util.Server
 import kotlinx.android.synthetic.main.activity_cart.*
+import kotlinx.android.synthetic.main.activity_main.*
+import org.json.JSONArray
+import org.json.JSONObject
 
 class CartActivity : AppCompatActivity() {
     var arrayProduct: ArrayList<Product_Cart> = ArrayList()
@@ -32,19 +40,35 @@ class CartActivity : AppCompatActivity() {
     }
 
     fun getData(){
-        var image = "http://192.168.1.30:8012/shopee/images/TaiNghe/sp1.png"
-        arrayProduct.add(Product_Cart(1, "Khánh", image, "1000000".toString().toDouble(), 1, "Điện thoại", true))
-        arrayProduct.add(Product_Cart(2, "Khánh", image, "1000000".toString().toDouble(), 2, "Điện thoại", false))
-        arrayProduct.add(Product_Cart(3, "Khánh", image, "1000000".toString().toDouble(), 3, "Điện thoại", false))
+        var requestQueue = Volley.newRequestQueue(this);
+        var stringRequest: StringRequest = object: StringRequest(Request.Method.POST, Server.pathCart, Response.Listener{
+                response ->
+            if(response != null && response.length > 0){
 
-        arrayProduct.add(Product_Cart(4, "Khánh", image, "1000000".toString().toDouble(), 4, "Tai nghe", true))
-        arrayProduct.add(Product_Cart(5, "Khánh", image, "1000000".toString().toDouble(), 2, "Tai nghe", false))
-        arrayProduct.add(Product_Cart(6, "Khánh", image, "1000000".toString().toDouble(), 1, "Tai nghe",false))
+                var jsonArray = JSONArray(response)
+                for(i in 0 until jsonArray.length()){
+                    var jsonObject: JSONObject = jsonArray.getJSONObject(i)
+                    var id = jsonObject.getInt("id")
+                    var name = jsonObject.getString("name")
+                    var image = jsonObject.getString("image")
+                    image = image.replace("localhost:8012", Server.localhost)
+                    var price = jsonObject.getDouble("price")
+                    var amount = jsonObject.getString("amount")
 
-        arrayProduct.add(Product_Cart(7, "Khánh", image, "1000000".toString().toDouble(), 1, "Cáp sạc", true))
-        arrayProduct.add(Product_Cart(8, "Khánh", image, "1000000".toString().toDouble(), 1, "Cáp sạc", false))
-        arrayProduct.add(Product_Cart(9, "Khánh", image, "1000000".toString().toDouble(), 1, "Cáp sạc", false))
-        adapterCart.notifyDataSetChanged()
+                    arrayProduct.add(Product_Cart(id, name, image, price, amount.toString().toInt()))
+                    adapterCart.notifyDataSetChanged()
+                }
+            }
+        }, Response.ErrorListener {
+        }){
+            override fun getParams(): MutableMap<String, String>? {
+                val params = HashMap<String, String>()
+                params.put("user", "khanhtq")
+                return params
+            }
+        }
+        requestQueue.add(stringRequest)
+
     }
 
     override fun onBackPressed() {
