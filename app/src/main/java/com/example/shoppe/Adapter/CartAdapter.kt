@@ -1,6 +1,7 @@
 package com.example.shoppe.Adapter
 
 import android.content.Context
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,6 +70,8 @@ class CartAdapter(var context: Context, var arrayProduct: ArrayList<Product_Cart
         if(holder.itemViewType == TYPE_ITEM){
             var item: Product_Cart = arrayProduct.get(position)
             var itemHodler = holder as ItemHolder
+            itemHodler.tvName.maxLines = 1
+            itemHodler.tvName.ellipsize = TextUtils.TruncateAt.END
             itemHodler.tvName.text = item.name
             var decimalFormat: DecimalFormat = DecimalFormat("###,###,###");
             itemHodler.tvPrice.text = "đ"+decimalFormat.format(item.price)

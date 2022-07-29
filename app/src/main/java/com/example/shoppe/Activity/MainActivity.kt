@@ -25,17 +25,16 @@ import com.example.shoppe.Util.CheckConnection
 import com.example.shoppe.Util.Server
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import okhttp3.internal.notify
 import org.json.JSONArray
 import org.json.JSONObject
 
 
 class MainActivity : AppCompatActivity() {
-
     var arrayItem: ArrayList<NavigationItem> = ArrayList()
     var adapter: ListViewNavigationAdapter = ListViewNavigationAdapter(this, arrayItem)
     var homeFragment: Home_Fragment = Home_Fragment()
     var arrayProductCart: ArrayList<Product_Cart> = ArrayList()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,14 +47,19 @@ class MainActivity : AppCompatActivity() {
         } else{
             CheckConnection.showToast(applicationContext, "Kiểm tra kết nối")
         }
-        setDataCart()
 
+
+    }
+
+    override fun onStart() {
+        arrayProductCart.clear()
+        setDataCart()
         cart.setOnClickListener {
             var intent: Intent = Intent(this, CartActivity::class.java)
-
             startActivity(intent)
             overridePendingTransition(R.anim.slide_enter_left, R.anim.slide_exit_left)
         }
+        super.onStart()
     }
 
     fun setDataCart(){
@@ -63,7 +67,6 @@ class MainActivity : AppCompatActivity() {
         var stringRequest: StringRequest = object: StringRequest(Request.Method.POST, Server.pathCart, Response.Listener{
             response ->
             if(response != null && response.length > 0){
-
                 var jsonArray = JSONArray(response)
                 for(i in 0 until jsonArray.length()){
                     var jsonObject: JSONObject = jsonArray.getJSONObject(i)
@@ -73,7 +76,6 @@ class MainActivity : AppCompatActivity() {
                     image = image.replace("localhost:8012", Server.localhost)
                     var price = jsonObject.getDouble("price")
                     var amount = jsonObject.getString("amount")
-
                     arrayProductCart.add(Product_Cart(id, name, image, price, amount.toString().toInt()))
                     count_item.text = (i+1).toString()
                 }
@@ -86,6 +88,7 @@ class MainActivity : AppCompatActivity() {
                 return params
             }
         }
+        Log.d("MMM", arrayProductCart.size.toString())
         requestQueue.add(stringRequest)
     }
 

@@ -2,6 +2,7 @@ package com.example.shoppe.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.Response
@@ -33,13 +34,13 @@ class CartActivity : AppCompatActivity() {
 
         main_content.adapter = adapterCart
         getData()
-
+        Log.d("MMM", "onCreate")
         btnBack_cart.setOnClickListener {
             onBackPressed()
         }
     }
 
-    fun getData(){
+    private fun getData(){
         var requestQueue = Volley.newRequestQueue(this);
         var stringRequest: StringRequest = object: StringRequest(Request.Method.POST, Server.pathCart, Response.Listener{
                 response ->
@@ -61,7 +62,7 @@ class CartActivity : AppCompatActivity() {
             }
         }, Response.ErrorListener {
         }){
-            override fun getParams(): MutableMap<String, String>? {
+            override fun getParams(): Map<String, String>? {
                 val params = HashMap<String, String>()
                 params.put("user", "khanhtq")
                 return params
@@ -74,5 +75,6 @@ class CartActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.slide_enter_right, R.anim.slide_exit_right)
+        finish()
     }
 }
